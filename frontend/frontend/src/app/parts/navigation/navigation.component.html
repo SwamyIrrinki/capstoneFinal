@@ -1,0 +1,84 @@
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#FDFEFF;">
+    <a class="navbar-brand" [routerLink]="root">
+        <img src="assets/brandlogo.png" width="300" height="80" class="d-inline-block align-center" alt="">
+  
+      
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <div class="navbar-nav " *ngIf="!currentUser || currentUser.role == Role.Customer">
+              
+            <a class=" h4 nav-item nav-link my-md-4 px-3"
+               routerLink="/category/0">
+               CHAIR
+            </a>
+            <a class="h4 nav-item nav-link my-md-4 px-3"
+               routerLink="/category/1">
+               MIRROR
+            </a>
+            <a class="h4 nav-item nav-link my-md-4 px-3"
+               routerLink="/category/2">
+               BED            </a>
+            <a class="h4 nav-item nav-link my-md-4 px-3"
+               routerLink="/category/3">
+               CLOCK
+            </a>
+
+           
+
+        </div>
+
+        
+
+        <div class="navbar-nav ml-auto">
+            <a *ngIf="!currentUser || currentUser.role == Role.Customer"
+                    class="h4 nav-item nav-link my-md-4 px-3" routerLink="/cart">
+                <i class="fas fa-shopping-cart"></i>
+                CART
+            </a>
+
+            <div class="navbar-nav" *ngIf="currentUser && currentUser.role == Role.Manager">
+
+                <a class="h4 nav-item nav-link my-md-4 px-3"  routerLink="/discount">DISCOUNT</a>
+                <a class="h4 nav-item nav-link my-md-4 px-3" (click)=getUsers() routerLink="/admin/user">USERS</a>
+                <a class="h4 nav-item nav-link my-md-4 px-3" routerLink="/seller/product">STOCKS</a>
+            </div>
+
+            <div class="navbar-nav" *ngIf="currentUser && currentUser.role == Role.Customer">
+                <a class="h4 nav-item nav-link my-md-4 px-3"  routerLink="/wishlist">WISHLIST</a>
+            </div>
+
+            <ng-container *ngIf="currentUser; else noUser">
+                
+               <!-- <a class="nav-item nav-link"  routerLink="/discount">Discount</a>
+                <a class="nav-item nav-link" (click)=getUsers() routerLink="/admin/user">Users</a>
+                <a class="nav-item nav-link" routerLink="/seller/product">Stocks</a> -->
+                <a class="h4 nav-item nav-link my-md-4 px-3" routerLink="/order">
+                    <i class="fas fa-list-ul"></i>
+                    ORDERS
+                </a>
+                <a class="h4 nav-item nav-link my-md-4 px-3" routerLink="/profile">
+                    {{name}}
+                </a>
+                <a class="h4 nav-item nav-link my-md-4 px-3" (click)="logout()" routerLink="/login" [queryParams]="{logout: true}">
+                    SIGN OUT
+                </a>
+            </ng-container>
+            <ng-template #noUser>
+                <a class="h4 nav-item nav-link my-md-4 px-3" routerLink="/login">
+                    SIGN IN
+                </a>
+                <a class="h4 nav-item nav-link my-md-4 px-3" routerLink="/register">
+                    SIGN UP
+                </a>
+            </ng-template>
+            
+            </div>
+    </div>
+</nav>
